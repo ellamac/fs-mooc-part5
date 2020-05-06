@@ -1,9 +1,9 @@
 post http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlbHRzaSIsImlkIjoiNWU3OTExMDdhZmI5Yjk3NWEzMWE1MTI1IiwiaWF0IjoxNTg0OTkyNjAxfQ.Oee7mwWMw9rW2bAWJyCJVQ_gbN1BzZnMk2b4rCUPLz4
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtlNjUiLCJpZCI6IjVlYjJhOGNkZWU2Yzg5MmYxMWVhYjVmNiIsImlhdCI6MTU4ODc2Njk2OX0.8sHOO3zUMybesP9bUfv8mhVzPWR6H1NtGeq9nK7gN3U
 
 {
-    "title": "peltsin ploki",
-    "author": "Peltsi Mäkelä",
-    "url": "http"
+    "title": "keskiviikko-blogi",
+    "author": "keke",
+    "url": "https://www.netflix.com/browse"
 }

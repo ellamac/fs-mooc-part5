@@ -8,7 +8,7 @@ import Blogs from './components/Blogs';
 import Notification from './components/Notification';
 
 const App = () => {
-  const [newBlog, setNewBlog] = useState([]);
+  const [newBlog, setNewBlog] = useState({});
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
@@ -53,7 +53,8 @@ const App = () => {
     try {
       window.localStorage.clear();
       setUser(null);
-      setNewBlog([]);
+      setUsername('');
+      setPassword('');
       setMessage({ message: "successfully logged out", color: "green" });
       setTimeout(() => {
         setMessage({ message: '', color: "grey" })
