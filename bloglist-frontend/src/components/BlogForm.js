@@ -1,39 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Form from './Form';
 import blogService from '../services/blogs';
+import Togglable from './Togglable';
 
 const BlogForm = ({ onClick, setMessage }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [url, setUrl] = useState('');
-  const [blog, setBlog] = useState({ title: '', author: '', url: '' });
+  const blogFormRef = React.createRef();
 
   const handleCreateBlog = (e) => {
     e.preventDefault();
 
-    const b = { title: title, author: author, url: url }
+    const b = { title: title, author: author, url: url };
 
-    blogService.create(b)
-      .then(createdBlog => {
+    blogService
+      .create(b)
+      .then((createdBlog) => {
         onClick(createdBlog);
-        setMessage({ message: `a new blog ${createdBlog.title} by ${createdBlog.author} added`, color: "green" });
+        setMessage({
+          message: `a new blog ${createdBlog.title} by ${createdBlog.author} added`,
+          color: 'green',
+        });
         setTimeout(() => {
-          setMessage({ message: '', color: "grey" })
+          setMessage({ message: '', color: 'grey' });
         }, 2500);
       })
-      .catch(error => {
-        setMessage({ message: error.response.data.error, color: "red" });
+      .catch((error) => {
+        setMessage({ message: error.response.data.error, color: 'red' });
         setTimeout(() => {
-          setMessage({ message: '', color: "grey" })
+          setMessage({ message: '', color: 'grey' });
         }, 2500);
       });
+    blogFormRef.current.toggleVisibility();
   };
 
   return (
-    <div>
+    <Togglable
+      buttonShowLabel='new blog'
+      buttonHideLabel='cancel'
+      ref={blogFormRef}
+    >
       <Form
         onSubmit={handleCreateBlog}
-        formName='Create New'
+        formName='Create new'
         inputs={[
           {
             label: 'title',
@@ -58,7 +68,7 @@ const BlogForm = ({ onClick, setMessage }) => {
           },
         ]}
       />
-    </div>
+    </Togglable>
   );
 };
 

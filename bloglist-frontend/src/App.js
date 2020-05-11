@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Blog from './components/Blog';
 import blogService from './services/blogs';
 import loginService from './services/login';
 import Form from './components/Form';
@@ -12,7 +11,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
-  const [message, setMessage] = useState({ message: "", color: "black" })
+  const [message, setMessage] = useState({ message: '', color: 'black' });
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser');
@@ -29,21 +28,24 @@ const App = () => {
       const user = await loginService.login({
         username,
         password,
-      })
-
+      });
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user));
 
       setUser(user);
+      blogService.setToken(user.token);
       setUsername('');
       setPassword('');
-      setMessage({ message: `successfully logged in as ${user.name}`, color: "green" });
+      setMessage({
+        message: `successfully logged in as ${user.name}`,
+        color: 'green',
+      });
       setTimeout(() => {
-        setMessage({ message: '', color: "grey" })
+        setMessage({ message: '', color: 'grey' });
       }, 2500);
     } catch (exception) {
-      setMessage({ message: "wrong username or password", color: "red" });
+      setMessage({ message: 'wrong username or password', color: 'red' });
       setTimeout(() => {
-        setMessage({ message: '', color: "grey" })
+        setMessage({ message: '', color: 'grey' });
       }, 2500);
     }
   };
@@ -53,19 +55,23 @@ const App = () => {
     try {
       window.localStorage.clear();
       setUser(null);
+      blogService.setToken('');
       setUsername('');
       setPassword('');
-      setMessage({ message: "successfully logged out", color: "green" });
+      setNewBlog({});
+      setMessage({ message: 'successfully logged out', color: 'green' });
       setTimeout(() => {
-        setMessage({ message: '', color: "grey" })
+        setMessage({ message: '', color: 'grey' });
       }, 2500);
     } catch (exception) {
-      setMessage({ message: "something went wrong with logging out", color: "red" });
+      setMessage({
+        message: 'something went wrong with logging out',
+        color: 'red',
+      });
       setTimeout(() => {
-        setMessage({ message: '', color: "grey" })
+        setMessage({ message: '', color: 'grey' });
       }, 2500);
     }
-
   };
 
   const loginForm = () => (
@@ -98,17 +104,19 @@ const App = () => {
       {user === null ? (
         loginForm()
       ) : (
-          <div>
-            <p>
-              {user.name} logged in{' '}
-              <button onClick={handleLogout}>log out</button>
-            </p>
-            <BlogForm onClick={(blog) => setNewBlog(blog)} setMessage={(message) => setMessage(message)} />
-            <Blogs newBlog={newBlog} />
-          </div>
-        )
-      }
-    </div >
+        <div>
+          <p>
+            {user.name} logged in{' '}
+            <button onClick={handleLogout}>log out</button>
+          </p>
+          <BlogForm
+            onClick={(blog) => setNewBlog(blog)}
+            setMessage={(message) => setMessage(message)}
+          />
+          <Blogs newBlog={newBlog} loggedUser={user.username} />
+        </div>
+      )}
+    </div>
   );
 };
 
