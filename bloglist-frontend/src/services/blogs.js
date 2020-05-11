@@ -13,14 +13,11 @@ const getAll = () => {
 };
 
 const create = async (newObject) => {
-  console.log('create prop', newObject);
   const config = {
     headers: { Authorization: token },
   };
-  console.log('create config', config);
+
   const response = await axios.post(baseUrl, newObject, config);
-  console.log('create response', response);
-  console.log('create responsedata', response.data);
   return response.data;
 };
 
