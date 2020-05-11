@@ -5,7 +5,7 @@ const Form = ({ onSubmit, formName, inputs }) => {
   return (
     <form onSubmit={onSubmit}>
       <h2>{formName}</h2>
-      {inputs.map(input => (
+      {inputs.map((input) => (
         <Input
           key={input.name}
           label={input.label}
