@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import Togglable from './Togglable';
+import Button from './Button';
 import blogService from '../services/blogs';
+import '../App.css';
 
 const Blog = ({ blog, loggedUser }) => {
   const [thisBlog, setThisBlog] = useState(blog);
-
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5,
-  };
 
   const handleLike = () => {
     blogService
@@ -38,17 +32,17 @@ const Blog = ({ blog, loggedUser }) => {
   };
 
   return thisBlog ? (
-    <div style={blogStyle}>
+    <div className='blog'>
       {thisBlog.title} {thisBlog.author}
       <Togglable buttonShowLabel='view' buttonHideLabel='hide'>
         <div>{thisBlog.url}</div>
         <div>
           {thisBlog.likes}
-          <button onClick={handleLike}>like</button>
+          <Button onClick={handleLike} buttonText='like' />
         </div>
         <div>{thisBlog.user.name}</div>
         {loggedUser === thisBlog.user.username ? (
-          <button onClick={handleRemove}>remove</button>
+          <Button onClick={handleRemove} buttonText='remove' />
         ) : (
           <></>
         )}
