@@ -1,14 +1,16 @@
 import React from 'react';
 import Input from './Input';
+import Button from './Button';
 
-const Form = ({ onSubmit, formName, inputs }) => {
+const Form = ({ onSubmit, formName, inputs, id }) => {
   return (
     <div className='formDiv'>
       <h2>{formName}</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} id='id'>
         {inputs.map((input) => (
           <Input
-            key={input.name}
+            key={input.id}
+            id={input.id}
             label={input.label}
             type={input.type}
             value={Object.values(input.value)[0]}
@@ -16,9 +18,12 @@ const Form = ({ onSubmit, formName, inputs }) => {
             onChange={input.onChange}
           />
         ))}
-        <button type='submit' className='formButton'>
-          {formName}
-        </button>
+        <Button
+          type='submit'
+          className='formButton'
+          id={`${id}-button`}
+          buttonText={formName}
+        />
       </form>
     </div>
   );

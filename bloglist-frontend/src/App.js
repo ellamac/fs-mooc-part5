@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import blogService from './services/blogs';
 import loginService from './services/login';
 import Form from './components/Form';
+import Button from './components/Button';
 import BlogForm from './components/BlogForm';
 import Blogs from './components/Blogs';
 import Notification from './components/Notification';
@@ -76,6 +77,7 @@ const App = () => {
 
   const loginForm = () => (
     <Form
+      id='loginForm'
       onSubmit={handleLogin}
       formName={'Login'}
       inputs={[
@@ -84,6 +86,7 @@ const App = () => {
           type: 'text',
           value: { username },
           name: 'Username',
+          id: 'username',
           onChange: ({ target }) => setUsername(target.value),
         },
         {
@@ -91,6 +94,7 @@ const App = () => {
           type: 'password',
           value: { password },
           name: 'Password',
+          id: 'password',
           onChange: ({ target }) => setPassword(target.value),
         },
       ]}
@@ -107,7 +111,11 @@ const App = () => {
         <div>
           <p>
             {user.name} logged in{' '}
-            <button onClick={handleLogout}>log out</button>
+            <Button
+              onClick={handleLogout}
+              buttonText='log out'
+              id='log-out-button'
+            />
           </p>
           <BlogForm
             onClick={(blog) => setNewBlog(blog)}

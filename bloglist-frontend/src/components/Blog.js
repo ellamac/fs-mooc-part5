@@ -32,17 +32,29 @@ const Blog = ({ blog, loggedUser }) => {
   };
 
   return thisBlog ? (
-    <div className='blog'>
+    <div className='blog' id={`${thisBlog.title.replace(' ', '-')}-blog`}>
       {thisBlog.title} {thisBlog.author}
-      <Togglable buttonShowLabel='view' buttonHideLabel='hide'>
+      <Togglable
+        buttonShowLabel='view'
+        buttonHideLabel='hide'
+        id={`${thisBlog.title.replace(' ', '-')}-toggle`}
+      >
         <div>{thisBlog.url}</div>
-        <div>
+        <div className='likes'>
           {thisBlog.likes}
-          <Button onClick={handleLike} buttonText='like' />
+          <Button
+            id={`${thisBlog.title.replace(' ', '-')}-like`}
+            onClick={handleLike}
+            buttonText='like'
+          />
         </div>
         <div>{thisBlog.user.name}</div>
         {loggedUser === thisBlog.user.username ? (
-          <Button onClick={handleRemove} buttonText='remove' />
+          <Button
+            id={`${thisBlog.title.replace(' ', '-')}-delete`}
+            onClick={handleRemove}
+            buttonText='remove'
+          />
         ) : (
           <></>
         )}

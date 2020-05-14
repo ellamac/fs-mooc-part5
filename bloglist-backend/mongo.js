@@ -13,13 +13,13 @@ const likes = process.argv[6];
 
 const url = `mongodb+srv://ella:${password}@cluster0-hucyi.mongodb.net/test?retryWrites=true&w=majority`;
 
-mongoose.connect(url, { useNewUrlParser: true });
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const blogSchema = new mongoose.Schema({
   title: String,
   author: String,
   url: String,
-  likes: Number
+  likes: Number,
 });
 
 const Blog = mongoose.model('Blog', blogSchema);
@@ -28,7 +28,7 @@ const blog = new Blog({
   title: title,
   author: author,
   url: urli,
-  likes: likes
+  likes: likes,
 });
 
 blog.save().then(() => {
