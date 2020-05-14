@@ -15,7 +15,11 @@ const Notification = ({ notif }) => {
     return null;
   }
 
-  return <div style={errorStyle}>{notif.message}</div>;
+  return (
+    <div style={errorStyle} id='notification'>
+      {notif.message}
+    </div>
+  );
 };
 
 export default Notification;

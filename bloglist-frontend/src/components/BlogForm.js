@@ -37,15 +37,18 @@ const BlogForm = ({ onClick, setMessage }) => {
 
   return (
     <Togglable
+      id='blogFormToggle'
       buttonShowLabel='new blog'
       buttonHideLabel='cancel'
       ref={blogFormRef}
     >
       <Form
+        id='blogForm'
         onSubmit={handleCreateBlog}
         formName='Create new'
         inputs={[
           {
+            id: 'title',
             label: 'title',
             type: 'text',
             value: '',
@@ -53,6 +56,7 @@ const BlogForm = ({ onClick, setMessage }) => {
             onChange: ({ target }) => setTitle(target.value),
           },
           {
+            id: 'author',
             label: 'author',
             type: 'author',
             value: '',
@@ -60,6 +64,7 @@ const BlogForm = ({ onClick, setMessage }) => {
             onChange: ({ target }) => setAuthor(target.value),
           },
           {
+            id: 'url',
             label: 'url',
             type: 'url',
             value: '',
